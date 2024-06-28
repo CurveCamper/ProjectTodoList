@@ -1,18 +1,35 @@
-//
-//  AddTaskButton.swift
-//  ToDoList
-//
-//  Created by Viktor on 28.06.2024.
-//
-
 import SwiftUI
 
 struct AddTaskButton: View {
+    @Binding var showTaskSheet: Bool
+    let resetTaskFields: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                button
+                Spacer()
+            }
+            .padding(.bottom, 16)
+        }
     }
-}
-
-#Preview {
-    AddTaskButton()
+    
+    private var button: some View {
+        Button(action: {
+            resetTaskFields()
+            showTaskSheet.toggle()
+        }) {
+            Image(systemName: "plus")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(Circle())
+                .shadow(radius: 2)
+        }
+        
+    }
 }

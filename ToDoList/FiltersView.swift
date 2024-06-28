@@ -1,18 +1,43 @@
-//
-//  FiltersView.swift
-//  ToDoList
-//
-//  Created by Viktor on 28.06.2024.
-//
-
 import SwiftUI
 
 struct FiltersView: View {
+    let countingCompletedTasks: Int
+    @Binding var showCompletedTask: Bool
+    @Binding var sortByImportance: Bool
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Выполнено - \(countingCompletedTasks)")
+                .font(.system(size: 14))
+                .padding(.leading)
+                .foregroundColor(.gray)
+
+            Spacer()
+
+            Menu {
+                Section {
+                    Button(action: {
+                        showCompletedTask.toggle()
+                    }) {
+                        Text(showCompletedTask ? "Скрыть выполненные" : "Показать выполненные")
+                    }
+                }
+
+                Section {
+                    Button(action: {
+                        sortByImportance.toggle()
+                    }) {
+                        Text(sortByImportance ? "Сортировать по добавлению" : "Сортировать по важности")
+                    }
+                }
+            } label: {
+                Text("Фильтры")
+                    .font(.system(size: 14))
+                    .foregroundColor(.blue)
+            }
+            .padding(.trailing)
+        }
+        .padding(.top)
     }
 }
 
-#Preview {
-    FiltersView()
-}
