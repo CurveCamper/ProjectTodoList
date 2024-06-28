@@ -15,6 +15,12 @@
 		77AB445F2C206AA100121F24 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB445E2C206AA100121F24 /* ToDoListUITests.swift */; };
 		77AB44612C206AA100121F24 /* ToDoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44602C206AA100121F24 /* ToDoListUITestsLaunchTests.swift */; };
 		77AB44A42C23317C00121F24 /* TodoListUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44A32C23317B00121F24 /* TodoListUnitTest.swift */; };
+		77AB44A62C29827900121F24 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44A52C29827900121F24 /* TodoItem.swift */; };
+		77AB44A82C2982B000121F24 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44A72C2982B000121F24 /* FileCache.swift */; };
+		77AB44F72C2F26E200121F24 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44F62C2F26E200121F24 /* FiltersView.swift */; };
+		77AB44F92C2F270F00121F24 /* TaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44F82C2F270F00121F24 /* TaskSheet.swift */; };
+		77AB44FB2C2F272900121F24 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44FA2C2F272900121F24 /* TaskListView.swift */; };
+		77AB44FD2C2F274700121F24 /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44FC2C2F274600121F24 /* AddTaskButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,12 @@
 		77AB445E2C206AA100121F24 /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
 		77AB44602C206AA100121F24 /* ToDoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		77AB44A32C23317B00121F24 /* TodoListUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUnitTest.swift; sourceTree = "<group>"; };
+		77AB44A52C29827900121F24 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		77AB44A72C2982B000121F24 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
+		77AB44F62C2F26E200121F24 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		77AB44F82C2F270F00121F24 /* TaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSheet.swift; sourceTree = "<group>"; };
+		77AB44FA2C2F272900121F24 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		77AB44FC2C2F274600121F24 /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +110,12 @@
 			children = (
 				77AB44432C206A9E00121F24 /* ToDoListApp.swift */,
 				77AB44452C206A9E00121F24 /* ContentView.swift */,
+				77AB44A72C2982B000121F24 /* FileCache.swift */,
+				77AB44A52C29827900121F24 /* TodoItem.swift */,
+				77AB44F62C2F26E200121F24 /* FiltersView.swift */,
+				77AB44F82C2F270F00121F24 /* TaskSheet.swift */,
+				77AB44FA2C2F272900121F24 /* TaskListView.swift */,
+				77AB44FC2C2F274600121F24 /* AddTaskButton.swift */,
 				77AB44472C206AA000121F24 /* Assets.xcassets */,
 				77AB44492C206AA000121F24 /* Preview Content */,
 			);
@@ -260,8 +278,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77AB44FB2C2F272900121F24 /* TaskListView.swift in Sources */,
+				77AB44F92C2F270F00121F24 /* TaskSheet.swift in Sources */,
 				77AB44462C206A9E00121F24 /* ContentView.swift in Sources */,
+				77AB44A62C29827900121F24 /* TodoItem.swift in Sources */,
+				77AB44A82C2982B000121F24 /* FileCache.swift in Sources */,
 				77AB44442C206A9E00121F24 /* ToDoListApp.swift in Sources */,
+				77AB44FD2C2F274700121F24 /* AddTaskButton.swift in Sources */,
+				77AB44F72C2F26E200121F24 /* FiltersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
