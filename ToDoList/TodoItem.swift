@@ -1,6 +1,12 @@
 import Foundation
+import Combine
+import UIKit
 
-struct TodoItem: Identifiable, Codable {
+class TaskStore: ObservableObject {
+    @Published var tasks: [TodoItem] = []
+}
+
+struct TodoItem: Identifiable, Codable, Equatable {
     let id: String
     var text: String
     var importance: Importance
@@ -9,6 +15,7 @@ struct TodoItem: Identifiable, Codable {
     let modificationDate: Date?
     var deadline: Date?
     var color: String = "#FFFFFF"
+    
 
     enum Importance: String, CaseIterable, Codable {
         case low, normal, high

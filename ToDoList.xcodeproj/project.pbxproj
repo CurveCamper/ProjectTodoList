@@ -21,6 +21,9 @@
 		77AB44F92C2F270F00121F24 /* TaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44F82C2F270F00121F24 /* TaskSheet.swift */; };
 		77AB44FB2C2F272900121F24 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44FA2C2F272900121F24 /* TaskListView.swift */; };
 		77AB44FD2C2F274700121F24 /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AB44FC2C2F274600121F24 /* AddTaskButton.swift */; };
+		77D01D462C330562004339EC /* UIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D01D452C330562004339EC /* UIViewControllerRepresentable.swift */; };
+		77D01D482C3309AA004339EC /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D01D472C3309AA004339EC /* ToDoListViewController.swift */; };
+		77D01D4C2C382AA1004339EC /* Extension Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D01D4B2C382AA1004339EC /* Extension Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		77AB44F82C2F270F00121F24 /* TaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSheet.swift; sourceTree = "<group>"; };
 		77AB44FA2C2F272900121F24 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		77AB44FC2C2F274600121F24 /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
+		77D01D452C330562004339EC /* UIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		77D01D472C3309AA004339EC /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		77D01D4B2C382AA1004339EC /* Extension Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +116,13 @@
 			children = (
 				77AB44432C206A9E00121F24 /* ToDoListApp.swift */,
 				77AB44452C206A9E00121F24 /* ContentView.swift */,
+				77D01D452C330562004339EC /* UIViewControllerRepresentable.swift */,
+				77D01D472C3309AA004339EC /* ToDoListViewController.swift */,
 				77AB44A72C2982B000121F24 /* FileCache.swift */,
 				77AB44A52C29827900121F24 /* TodoItem.swift */,
 				77AB44F62C2F26E200121F24 /* FiltersView.swift */,
 				77AB44F82C2F270F00121F24 /* TaskSheet.swift */,
+				77D01D4B2C382AA1004339EC /* Extension Color.swift */,
 				77AB44FA2C2F272900121F24 /* TaskListView.swift */,
 				77AB44FC2C2F274600121F24 /* AddTaskButton.swift */,
 				77AB44472C206AA000121F24 /* Assets.xcassets */,
@@ -280,11 +289,14 @@
 			files = (
 				77AB44FB2C2F272900121F24 /* TaskListView.swift in Sources */,
 				77AB44F92C2F270F00121F24 /* TaskSheet.swift in Sources */,
+				77D01D462C330562004339EC /* UIViewControllerRepresentable.swift in Sources */,
+				77D01D4C2C382AA1004339EC /* Extension Color.swift in Sources */,
 				77AB44462C206A9E00121F24 /* ContentView.swift in Sources */,
 				77AB44A62C29827900121F24 /* TodoItem.swift in Sources */,
 				77AB44A82C2982B000121F24 /* FileCache.swift in Sources */,
 				77AB44442C206A9E00121F24 /* ToDoListApp.swift in Sources */,
 				77AB44FD2C2F274700121F24 /* AddTaskButton.swift in Sources */,
+				77D01D482C3309AA004339EC /* ToDoListViewController.swift in Sources */,
 				77AB44F72C2F26E200121F24 /* FiltersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
