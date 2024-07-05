@@ -54,10 +54,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        // Получение уникальных дат задач и их сортировка
         dateKeys = Array(Set(tasks.compactMap { $0.deadline })).sorted()
 
-        // Настройка коллекции
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 100, height: 50)
@@ -68,21 +66,17 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DateCell")
         view.addSubview(collectionView)
 
-        // Настройка линии разделения
         separatorLine = UIView()
         separatorLine.backgroundColor = .gray
         view.addSubview(separatorLine)
 
-        // Настройка таблицы
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
 
-        // Регистрация ячеек
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
 
-        // Настройка ограничений Auto Layout
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         separatorLine.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -157,7 +151,6 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
 
         cell.textLabel?.attributedText = attributeString
 
-        // Применение скругления к ячейке
         cell.contentView.layer.cornerRadius = 20
         cell.contentView.layer.masksToBounds = true
         cell.contentView.layer.borderWidth = 0.5
@@ -200,13 +193,11 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             taskColor: .constant(Color(hex: task.color) ?? .white),
             isEditing: true,
             onSave: {
-                // Логика сохранения изменений
             },
             onCancel: {
                 self.dismiss(animated: true, completion: nil)
             },
             onDelete: { todoItem in
-                // Логика удаления задачи
             }
         )
         
@@ -216,7 +207,6 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         present(hostingController, animated: true, completion: nil)
     }
 
-    // Добавление действий свайпа
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completeAction = UIContextualAction(style: .normal, title: "Выполнено") { (action, view, completionHandler) in
             self.updateTaskCompletion(at: indexPath, isCompleted: true)
@@ -298,11 +288,9 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         selectedIndexPath = indexPath
         collectionView.reloadData()
 
-        // Определяем правильный индекс секции
         let section = indexPath.item
         let indexPath = IndexPath(row: 0, section: section)
 
-        // Скроллим таблицу к выбранной секции
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }
