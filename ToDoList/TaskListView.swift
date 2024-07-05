@@ -36,7 +36,6 @@ struct TaskListView: View {
                 }
             }
         }
-        .navigationBarTitle("Мои дела")
     }
     
     @ViewBuilder
