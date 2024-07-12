@@ -27,7 +27,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         @objc private func addButtonTapped() {
-            
+            // Действие при нажатии на кнопку
+            // Открытие формы добавления задачи
             let taskSheet = TaskSheet(
                 taskText: .constant(""),
                 taskImportance: .constant(.normal),
@@ -53,9 +54,10 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        // Получение уникальных дат задач и их сортировка
         dateKeys = Array(Set(tasks.compactMap { $0.deadline })).sorted()
 
+        // Настройка коллекции
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 100, height: 50)
@@ -66,17 +68,21 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DateCell")
         view.addSubview(collectionView)
 
+        // Настройка линии разделения
         separatorLine = UIView()
         separatorLine.backgroundColor = .gray
         view.addSubview(separatorLine)
 
+        // Настройка таблицы
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
 
+        // Регистрация ячеек
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
 
+        // Настройка ограничений Auto Layout
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         separatorLine.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -151,6 +157,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
 
         cell.textLabel?.attributedText = attributeString
 
+        // Применение скругления к ячейке
         cell.contentView.layer.cornerRadius = 20
         cell.contentView.layer.masksToBounds = true
         cell.contentView.layer.borderWidth = 0.5
@@ -206,7 +213,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         let hostingController = UIHostingController(rootView: taskSheet)
         present(hostingController, animated: true, completion: nil)
     }
-
+    // Добавление действий свайпа
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completeAction = UIContextualAction(style: .normal, title: "Выполнено") { (action, view, completionHandler) in
             self.updateTaskCompletion(at: indexPath, isCompleted: true)
