@@ -1,4 +1,5 @@
 import SwiftUI
+import CocoaLumberjackSwift
 
 struct ContentView: View {
     @State private var tasks = [TodoItem]()
@@ -27,6 +28,10 @@ struct ContentView: View {
                 content(geometry: geometry)
                     .navigationBarTitle("Мои дела", displayMode: .inline)
                     .navigationBarItems(trailing: calendarNavigationLink)
+                    .onAppear {
+                        DDLogInfo("ContentView has appeared")
+                        loadRemoteTasks()
+                    }
             }
         }
     }
@@ -166,14 +171,17 @@ struct ContentView: View {
         let newTask = TodoItem(text: taskText, importance: taskImportance, deadLine: isDeadlineEnabled ? taskDeadline : nil, color: taskColor.toHex() ?? "#FFFFFF")
         tasks.append(newTask)
         saveTasks()
+        DDLogInfo("Added new task with text: \(taskText)")
     }
 
     private func saveTasks() {
         fileCache.saveTasksToFile(named: "tasks.json", tasks: tasks)
+        DDLogInfo("Tasks saved")
     }
 
     private func loadTasks() {
         tasks = fileCache.loadTasksFromFile(named: "tasks.json")
+        DDLogInfo("Tasks loaded")
     }
 
     private func updateTask(_ task: TodoItem) {
@@ -183,6 +191,7 @@ struct ContentView: View {
             tasks[index].deadline = isDeadlineEnabled ? taskDeadline : nil
             tasks[index].color = taskColor.toHex() ?? "#FFFFFF"
             saveTasks()
+            DDLogInfo("Updated task with id: \(task.id)")
         }
     }
 
@@ -193,6 +202,30 @@ struct ContentView: View {
         taskDeadline = Date()
         isDeadlineEnabled = false
         taskColor = .white
+    }
+    
+    private func loadRemoteTasks() {
+        let url = URL(string: "https://beta.mrdekk.ru/todo")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        DispatchQueue.global().async {
+            do {
+                let (data, response) = try URLSession.shared.dataTask(for: request)
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                    if let decodedTasks = try? JSONDecoder().decode([TodoItem].self, from: data) {
+                        DispatchQueue.main.async {
+                            self.tasks = decodedTasks
+                            DDLogInfo("Remote tasks loaded successfully")
+                        }
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    DDLogError("Failed to load remote tasks: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
 

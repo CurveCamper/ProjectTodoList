@@ -1,0 +1,7 @@
+line_length:
+- 300 # warning
+disabled_rules:
+- trailing_whitespace
+- trailing_newline
+- vertical_whitespace
+- identifier_name
