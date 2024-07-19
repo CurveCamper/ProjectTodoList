@@ -30,7 +30,7 @@ struct ContentView: View {
                     .navigationBarItems(trailing: calendarNavigationLink)
                     .onAppear {
                         DDLogInfo("ContentView has appeared")
-                        loadRemoteTasks()
+                        loadRemoteTasks() // Загружаем задачи с сервера при появлении экрана
                     }
             }
         }
@@ -93,12 +93,6 @@ struct ContentView: View {
         }
     }
 
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-        }
-    }
-    
     private func landscapeView() -> some View {
         HStack {
             TaskListView(
@@ -168,10 +162,22 @@ struct ContentView: View {
     }
 
     private func addNewTask() {
-        let newTask = TodoItem(text: taskText, importance: taskImportance, deadLine: isDeadlineEnabled ? taskDeadline : nil, color: taskColor.toHex() ?? "#FFFFFF")
-        tasks.append(newTask)
-        saveTasks()
-        DDLogInfo("Added new task with text: \(taskText)")
+        let newTask = TodoItem(text: taskText, importance: taskImportance, deadline: isDeadlineEnabled ? taskDeadline : nil, color: taskColor.toHex() ?? "#FFFFFF")
+        
+        NetworkingService.shared.addTask(newTask) { result in
+            switch result {
+            case .success(let addedTask):
+                DispatchQueue.main.async {
+                    self.tasks.append(addedTask)
+                    self.saveTasks()
+                    DDLogInfo("Added new task with text: \(taskText)")
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    DDLogError("Failed to add task: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 
     private func saveTasks() {
@@ -181,54 +187,36 @@ struct ContentView: View {
 
     private func loadTasks() {
         tasks = fileCache.loadTasksFromFile(named: "tasks.json")
-        DDLogInfo("Tasks loaded")
+        DDLogInfo("Tasks loaded from file")
     }
 
-    private func updateTask(_ task: TodoItem) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].text = taskText
-            tasks[index].importance = taskImportance
-            tasks[index].deadline = isDeadlineEnabled ? taskDeadline : nil
-            tasks[index].color = taskColor.toHex() ?? "#FFFFFF"
-            saveTasks()
-            DDLogInfo("Updated task with id: \(task.id)")
-        }
-    }
-
-    private func resetTaskFields() {
-        editingTask = nil
-        taskText = ""
-        taskImportance = .normal
-        taskDeadline = Date()
-        isDeadlineEnabled = false
-        taskColor = .white
-    }
-    
     private func loadRemoteTasks() {
-        let url = URL(string: "https://beta.mrdekk.ru/todo")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        DispatchQueue.global().async {
-            do {
-                let (data, response) = try URLSession.shared.dataTask(for: request)
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    if let decodedTasks = try? JSONDecoder().decode([TodoItem].self, from: data) {
-                        DispatchQueue.main.async {
-                            self.tasks = decodedTasks
-                            DDLogInfo("Remote tasks loaded successfully")
-                        }
-                    }
+        NetworkingService.shared.fetchTasks { result in
+            switch result {
+            case .success(let fetchedTasks):
+                DispatchQueue.main.async {
+                    self.tasks = fetchedTasks
+                    self.saveTasks()
+                    DDLogInfo("Remote tasks loaded")
                 }
-            } catch {
+            case .failure(let error):
                 DispatchQueue.main.async {
                     DDLogError("Failed to load remote tasks: \(error.localizedDescription)")
                 }
             }
         }
     }
-}
 
-#Preview {
-    ContentView()
+    private func updateTask(_ task: TodoItem) {
+        // Update task implementation
+    }
+
+    private func resetTaskFields() {
+            editingTask = nil
+            taskText = ""
+            taskImportance = .normal
+            isDeadlineEnabled = false
+            taskDeadline = Date()
+            taskColor = .white
+        }
 }

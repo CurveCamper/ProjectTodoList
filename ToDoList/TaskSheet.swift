@@ -45,7 +45,7 @@ struct TaskSheet: View {
                     if isEditing {
                         Button(action: {
                             if let onDelete = onDelete {
-                                onDelete(TodoItem(text: taskText, importance: taskImportance, deadLine: isDeadlineEnabled ? taskDeadline : nil, color: taskColor.toHex() ?? "#FFFFFF"))
+                                onDelete(TodoItem(text: taskText, importance: taskImportance, deadline: isDeadlineEnabled ? taskDeadline : nil, color: taskColor.toHex() ?? "#FFFFFF"))
                             }
                             onCancel()
                         }) {
